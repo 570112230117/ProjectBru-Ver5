@@ -35,11 +35,35 @@ CREATE TABLE IF NOT EXISTS `login` (
 -- Dumping data for table amnuay.login: ~4 rows (approximately)
 /*!40000 ALTER TABLE `login` DISABLE KEYS */;
 INSERT INTO `login` (`id`, `username`, `password`, `role`, `status`, `name`, `address`, `phone`, `gender`, `birthday`, `work`) VALUES
-	(0, 'ทดสอบระบบ', 'ทดสอบระบบ', 'ทดสอบระบบ', '1', '', 'ทดสอบระบบ', 'ทดสอบระบบ', 'ทดสอบระบบ', '2018-08-07', '2018-08-07'),
-	(1, 'admin', '1234', '1', '1', 'admin', 'ที่อยู่ admin x', '191', 'ชาย', '2018-07-20', '2018-07-20'),
-	(2, 'a', 'a', '2', '1', 'นาย A', 'ที่อยู่ aa', '0998094514', 'ชาย', '1995-10-15', '2018-07-20'),
+	(0, 'ทดสอบระบบ', 'ทดสอบระบบ', '1', '1', '', 'ทดสอบระบบ', 'ทดสอบระบบ', 'ชาย', '2018-08-07', '2018-08-07'),
+	(1, 'admin', '1234', '1', '1', 'admin', 'ที่อยู่ admin x', '1911', 'ชาย', '2018-07-20', '2018-07-20'),
+	(2, 'a', 'a', '2', '1', 'นาย A', 'ที่อยู่ aaa', '0998094514', 'ชาย', '1995-10-15', '2018-07-20'),
 	(3, 'x', 'x', '2', '1', 'xxxx', 'xxxx', 'xxx', 'ชาย', '2018-07-20', '2018-07-20');
 /*!40000 ALTER TABLE `login` ENABLE KEYS */;
+
+-- Dumping structure for table amnuay.parts
+CREATE TABLE IF NOT EXISTS `parts` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `date_receipt` timestamp NULL DEFAULT NULL,
+  `device_id` varchar(50) DEFAULT NULL,
+  `device_name` varchar(50) DEFAULT NULL,
+  `serialnumber` varchar(50) DEFAULT NULL,
+  `brand` varchar(50) DEFAULT NULL,
+  `warranty` varchar(50) DEFAULT NULL,
+  `price` decimal(10,0) DEFAULT '0',
+  `device_user` varchar(50) DEFAULT NULL,
+  `customer_name` varchar(50) DEFAULT NULL,
+  `note` varchar(50) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+
+-- Dumping data for table amnuay.parts: ~2 rows (approximately)
+/*!40000 ALTER TABLE `parts` DISABLE KEYS */;
+INSERT INTO `parts` (`id`, `date_receipt`, `device_id`, `device_name`, `serialnumber`, `brand`, `warranty`, `price`, `device_user`, `customer_name`, `note`) VALUES
+	(1, '2018-08-16 23:00:53', 'xxx', 'xxx', 'xxx', 'xxx', 'xxx', 5000, '2', '127', 'xxx'),
+	(2, '2018-08-16 23:18:06', 'test', 'test', 'test', 'test', 'test', 500, '3', '127', 'test'),
+	(3, '2018-08-16 23:35:01', 't', 't', 't', 't', 't', 545, '3', '127', 'tt');
+/*!40000 ALTER TABLE `parts` ENABLE KEYS */;
 
 -- Dumping structure for table amnuay.repair
 CREATE TABLE IF NOT EXISTS `repair` (
@@ -58,34 +82,35 @@ CREATE TABLE IF NOT EXISTS `repair` (
   `repairmen_date` date DEFAULT NULL,
   `repairmen_completion` date DEFAULT NULL,
   `repairmen_cause` varchar(255) NOT NULL DEFAULT '',
-  `repairmen_expenses` decimal(10,0) DEFAULT '0',
+  `repairmen_expenses` varchar(50) DEFAULT NULL,
   `repairmen_status` varchar(50) DEFAULT '1',
   `repairmen_id` varchar(50) DEFAULT '0',
   PRIMARY KEY (`repair_id`),
   KEY `repairmen_id` (`repairmen_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=143 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=144 DEFAULT CHARSET=utf8;
 
--- Dumping data for table amnuay.repair: ~18 rows (approximately)
+-- Dumping data for table amnuay.repair: ~19 rows (approximately)
 /*!40000 ALTER TABLE `repair` DISABLE KEYS */;
 INSERT INTO `repair` (`repair_id`, `repair_date`, `repair_name`, `repair_address`, `repair_phone`, `repair_email`, `repair_appliances`, `repair_product`, `repair_brand`, `repair_waste`, `repair_detail`, `repair_appointment`, `repairmen_date`, `repairmen_completion`, `repairmen_cause`, `repairmen_expenses`, `repairmen_status`, `repairmen_id`) VALUES
-	(125, '2018-07-10 15:26:57', 'a', 'a', 'a', 'a', '02', '006', '100', 'a', 'a', '2018-07-10', '2018-07-26', '2018-07-26', 'ได้แล้ว', 500, '4', '2'),
-	(126, '2018-07-10 15:29:55', 'q', 'q', 'q', 'q', '02', '004', '63', 'q', 'q', '2018-07-10', '2018-07-25', '2018-07-25', 'sssss', 600, '4', '2'),
-	(127, '2018-07-10 15:38:58', 'a', 'a', 'a', 'a', '01', '001', '5', 'a', 'a', '2018-07-10', '2018-07-26', '2018-07-26', 'สายขาด', 500, '2', '2'),
-	(128, '2018-07-10 16:46:40', 'dsadsaa', 'dsadsa\r\n				\r\n				\r\n				\r\n				\r\n				\r\n				\r\n				', 'dsad', 'dsadsa', '02', '006', '100', 'dsadsa', 'dsadsa', '2018-07-10', '2018-07-25', '2018-07-25', 'sssss', 200, '5', '2'),
-	(129, '2018-08-05 15:59:20', 'อำนวย กลีบม่วง', 'กระสัง', '0998094514', 'am-nuay2010@hotmail.com', '01', '002', '24', 'เสีย', 'เอาเครื่องมือมาด้วย', '2018-08-06', '2018-07-25', '2018-07-25', 'wtf', 300, '1', '2'),
-	(130, '2018-08-05 16:36:24', 've', 've', 've', 've', '04', '013', '224', 've', 've', '2018-08-27', '2018-08-06', '2018-08-06', '', 0, '1', '2'),
-	(131, '2018-08-06 12:37:19', 'q', 'q', 'q', 'q', '01', '002', '23', 'q', 'q', '2018-08-06', '2018-08-06', '2018-08-06', '', 0, '3', '2'),
-	(132, '2018-08-06 15:49:03', '1', '1', '1', '1', '03', '006', '165', '1', '1', '2018-08-06', '2018-08-06', '2018-08-06', '1', 1, '4', '2'),
-	(133, '2018-08-06 16:04:47', 'sa', 'sa', 'sa', 'sa', '02', '006', '101', 'sa', 'sa', '2018-08-06', '2018-08-07', '2018-08-07', 'sss', 0, '4', '2'),
-	(134, '2018-08-06 16:58:29', 'ww', 'ww', 'ww', 'ww', '04', '013', '225', 'ww', 'ww', '2018-08-07', '2018-08-17', '2018-08-09', 'dsadsadsa', 100, '6', '2'),
-	(135, '2018-08-06 17:07:52', 'dsadsa', 'dsadsa', 'dsadsa', 'dsadsa', '02', '004', '62', 'dsadsa', 'dsadsa', '2018-08-06', '2018-08-06', '2018-08-06', 'ซื้อใหม่ ', 100, '4', '2'),
-	(136, '2018-08-06 20:12:06', 'sa', '				sa\r\n				', 'sa', 'sa', '03', '010', '164', 'sa', 'sa', '2018-08-06', '2018-08-06', '2018-08-06', 'xxxxx', 0, '2', '2'),
-	(137, '2018-08-11 16:20:59', 'อำนวย กลีบม่วง', '129/2 บ้านหนองขอน', '0998094514', 'amnuay.kle@bru.ac.th', '01', '002', '26', 'มันไม่เย็น', 'ไม่มี', '2018-08-13', '2018-08-11', '2018-08-11', 'เปลี่ยนแก็ส', 300, '4', '2'),
-	(138, '2018-08-13 15:06:12', 'นายสกล', 'ประโคนชัย', '08051512312', 'kkkkkkkkkkkkkkkk@ga.com', '03', '010', '182', 'ไฟไม่ติด', 'เอาหลอดไฟมาด้วย', '2018-08-13', '2018-08-13', '2018-08-13', 'ได้แล้ว', 300, '4', '2'),
-	(139, '2018-08-13 15:08:21', 'aaaaaaa', 'aaaaaaaaa', 'aaaaaaaa', 'aaaaaaaa', '01', '001', '14', 'aaaa', 'aaaaaa', '2018-08-13', NULL, NULL, '', 0, '1', '0'),
-	(140, '2018-08-13 16:58:39', 'test', 'test', 'test', 'test', '01', '001', '12', 'test', 'test', '2018-08-13', NULL, NULL, '', 0, '1', '0'),
-	(141, '2018-08-13 16:58:39', 'test', 'test', 'test', 'test', '01', '001', '12', 'test', 'test', '2018-08-13', NULL, NULL, '', 0, '1', '0'),
-	(142, '2018-08-13 17:01:00', 'test', 'test', 'test', 'test', '02', '004', '71', 'test', 'test', '2018-08-13', '2018-08-15', '2018-08-15', 'test', 100, '4', '2');
+	(125, '2018-07-10 15:26:57', 'a', 'a', 'a', 'a', '02', '006', '100', 'a', 'a', '2018-07-10', '2018-07-26', '2018-07-26', 'ได้แล้ว', '500', '4', '2'),
+	(126, '2018-07-10 15:29:55', 'q', 'q', 'q', 'q', '02', '004', '63', 'q', 'q', '2018-07-10', '2018-07-25', '2018-07-25', 'sssss', '600', '4', '2'),
+	(127, '2018-07-10 15:38:58', 'a', 'a', 'a', 'a', '01', '001', '5', 'a', 'a', '2018-07-10', '2018-07-26', '2018-07-26', 'สายขาด', '500', '2', '2'),
+	(128, '2018-07-10 16:46:40', 'dsadsaa', 'dsadsa\r\n				\r\n				\r\n				\r\n				\r\n				\r\n				\r\n				', 'dsad', 'dsadsa', '02', '006', '100', 'dsadsa', 'dsadsa', '2018-07-10', '2018-07-25', '2018-07-25', 'sssss', '200', '5', '2'),
+	(129, '2018-08-05 15:59:20', 'อำนวย กลีบม่วง', 'กระสัง', '0998094514', 'am-nuay2010@hotmail.com', '01', '002', '24', 'เสีย', 'เอาเครื่องมือมาด้วย', '2018-08-06', '2018-07-25', '2018-07-25', 'wtf', '300', '1', '2'),
+	(130, '2018-08-05 16:36:24', 've', 've', 've', 've', '04', '013', '224', 've', 've', '2018-08-27', '2018-08-06', '2018-08-06', '', '0', '1', '2'),
+	(131, '2018-08-06 12:37:19', 'q', 'q', 'q', 'q', '01', '002', '23', 'q', 'q', '2018-08-06', '2018-08-06', '2018-08-06', '', '0', '3', '2'),
+	(132, '2018-08-06 15:49:03', '1', '1', '1', '1', '03', '006', '165', '1', '1', '2018-08-06', '2018-08-06', '2018-08-06', '1', '1', '4', '2'),
+	(133, '2018-08-06 16:04:47', 'sa', 'sa', 'sa', 'sa', '02', '006', '101', 'sa', 'sa', '2018-08-06', '2018-08-07', '2018-08-07', 'sss', '0', '4', '2'),
+	(134, '2018-08-06 16:58:29', 'ww', 'ww', 'ww', 'ww', '04', '013', '225', 'ww', 'ww', '2018-08-07', '2018-08-17', '2018-08-09', 'dsadsadsa', '100', '6', '2'),
+	(135, '2018-08-06 17:07:52', 'dsadsa', 'dsadsa', 'dsadsa', 'dsadsa', '02', '004', '62', 'dsadsa', 'dsadsa', '2018-08-06', '2018-08-06', '2018-08-06', 'ซื้อใหม่ ', '100', '4', '2'),
+	(136, '2018-08-06 20:12:06', 'sa', '				sa\r\n				', 'sa', 'sa', '03', '010', '164', 'sa', 'sa', '2018-08-06', '2018-08-06', '2018-08-06', 'xxxxx', '0', '2', '2'),
+	(137, '2018-08-11 16:20:59', 'อำนวย กลีบม่วง', '129/2 บ้านหนองขอน', '0998094514', 'amnuay.kle@bru.ac.th', '01', '002', '26', 'มันไม่เย็น', 'ไม่มี', '2018-08-13', '2018-08-11', '2018-08-11', 'เปลี่ยนแก็ส', '300', '4', '2'),
+	(138, '2018-08-13 15:06:12', 'นายสกล', 'ประโคนชัย', '08051512312', 'kkkkkkkkkkkkkkkk@ga.com', '03', '010', '182', 'ไฟไม่ติด', 'เอาหลอดไฟมาด้วย', '2018-08-13', '2018-08-13', '2018-08-13', 'ได้แล้ว', '300', '4', '2'),
+	(139, '2018-08-13 15:08:21', 'aaaaaaa', 'aaaaaaaaa', 'aaaaaaaa', 'aaaaaaaa', '01', '001', '14', 'aaaa', 'aaaaaa', '2018-08-13', NULL, NULL, '', '0', '1', '0'),
+	(140, '2018-08-13 16:58:39', 'test', 'test', 'test', 'test', '01', '001', '12', 'test', 'test', '2018-08-13', NULL, NULL, '', '0', '1', '0'),
+	(141, '2018-08-13 16:58:39', 'test', 'test', 'test', 'test', '01', '001', '12', 'test', 'test', '2018-08-13', NULL, NULL, '', '0', '1', '0'),
+	(142, '2018-08-13 17:01:00', 'test', 'test', 'test', 'test', '02', '004', '71', 'test', 'test', '2018-08-13', '2018-08-15', '2018-08-15', 'xxxxxxxxx', '100', '4', '2'),
+	(143, '2018-08-16 14:42:45', 'xx', 'xx', 'xx', 'xx', '04', '013', '232', 'xx', 'xx', '2018-08-16', '2018-08-16', '2018-08-16', 'เปลี่ยนลำโพง', '1,500.00', '4', '2');
 /*!40000 ALTER TABLE `repair` ENABLE KEYS */;
 
 -- Dumping structure for table amnuay.repair_status
