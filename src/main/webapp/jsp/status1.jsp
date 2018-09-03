@@ -1,27 +1,26 @@
 <%@page import="com.bru.model.RepairBean"%>
-<%@ page language="java" contentType="text/html; charset=UTF-8"
+    <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+        <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
         <jsp:include page="../layout/menuuser.jsp"></jsp:include>
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>status1</title>
-  <%
-	RepairBean beanRe = null;
+        <html>
+
+        <head>
+            <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+            <title>status1</title>
+            <%
+	RepairBean bean1 = null;
 %>
                 <%
-	beanRe = (RepairBean) request.getAttribute("beanRe");
+    bean1 = (RepairBean) request.getAttribute("bean1");
 
 %>
-</head>
-<body>
+        </head>
+
+        <body>
             <div class="container-fluid">
                 <div class="box box-default">
-                    <h3>
-                        ตารางการแจ้งซ่อม <small>รวมรายการแจ้งซ่อมทั้งหมด <span
-					class="label label-danger"><%=beanRe.getRepairId()%></span> รายการ
-				</small>
+                    <h3> ตารางรอตรวจสอบข้อมูล <small>รวมทั้งหมด <span class="label bg-aqua"><%=bean1.getRepairId()%></span> รายการ</small>
                     </h3>
                     <br>
                     <br>
@@ -102,4 +101,4 @@
             });
         </script>
 
-</html>
+        </html>

@@ -75,6 +75,11 @@ public class RepairController {
 		return "map";
 	}
 
+	@RequestMapping(path = "/map2", method = RequestMethod.GET)
+	public String map2(Model model) {
+		return "map1";
+	}
+
 	@RequestMapping(path = "/map1", method = RequestMethod.GET)
 	public String map1(Model model) {
 		return "testmap";
@@ -108,12 +113,8 @@ public class RepairController {
 
 	// insert
 	@RequestMapping(value = { "/insertRepair" }, method = RequestMethod.POST, produces = "application/json")
-	public Map<String, String> insertRepair(@RequestBody RepairBean repairBean) {
-		try {
-			repairDao.insert(repairBean);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+	public Map<String, String> insertRepair(@RequestBody RepairBean repairBean) throws Exception {
+		repairDao.insert(repairBean);
 		Map<String, String> repair = new HashMap<String, String>();
 		return repair;
 	}

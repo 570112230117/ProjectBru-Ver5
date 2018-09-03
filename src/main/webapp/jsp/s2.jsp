@@ -37,7 +37,7 @@
                         <div class="container-fluid">
                             <div class="box box-default">
                                 <div>
-                                    <h3>รายการแจ้งซ่อมทั้งหมด <small>รวมรายการแจ้งซ่อมทั้งหมด <span class="label label-danger"><%=beanRe.getRepairId() %></span> รายการ</small>
+                                    <h3>ตารางส่งซ่อม <small>รวมทั้งหมด <span class="label bg-black"><%=bean2.getRepairId() %></span> รายการ</small>
                                         <a href="#">
                                             <span class="btn btn-default pull-right">
 								<span class="glyphicon glyphicon-plus"></span>เพิ่มข้อมูล</span>
@@ -185,7 +185,7 @@
                     <script>
                         $(document).ready(function() {
                             var table = $('#employeesTable').DataTable({
-                                "sAjaxSource": "/status22",
+                                "sAjaxSource": "/all",
                                 "iDisplayLength": 25,
                                 "sAjaxDataProp": "",
                                 "order": [
@@ -233,7 +233,7 @@
                                         "mData": "",
                                         "sWidth": "50px",
                                         "mRender": function(data, type, full) {
-                                            return '<center><a href="/repairmen/' + full.repairId + '" ' + 'class="btn btn-warning btn-sm"><span class="glyphicon glyphicon-edit"></span>' + '</a> <a onclick="gotoUpdate(' + full.repairId + ')" class="btn btn-info btn-sm view_detail" data-toggle="modal" data-target="#myModal"><i class="glyphicon glyphicon-file"></i>  ' + '</a></center>';
+                                            return '<center><a href="/repairmen/' + full.repairId + '" ' + 'class="btn btn-warning btn-xs"><span class="glyphicon glyphicon-edit"></span> แก้ไข' + '</a> <a onclick="gotoUpdate(' + full.repairId + ')" class="btn btn-info btn-xs view_detail" data-toggle="modal" data-target="#myModal" >รายละเอียด  ' + '</a>  <a href="/map/' + full.repairId + '" ' + ' type="button" class="btn btn-success btn-xs">GPS</a>' + ' </center>';
                                         }
                                     },
 

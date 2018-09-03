@@ -12,12 +12,7 @@
                         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
                         <title>Welcome to Repair</title>
                         <link href="/css/repair.css" rel="stylesheet">
-                        <link href="/css/map.css" rel="stylesheet">
-                        <script src="/js/repair.js"></script>
                         <script src="/js/dropdown.js"></script>
-                        <script src="/js/map.js"></script>
-                        <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBjUZj4cPYNcYb2MX45hFhdQyA5YBnFfc8&callback=initMap">
-                        </script>
                         <%
 	WarrantyBean bean = null;
     RepairBean beanRe = null;
@@ -42,7 +37,7 @@
                                         </div>
                                         <div class="form-group">
                                             <label for="exampleFormControlInput1">วันเวลาที่แจ้ง</label>
-                                            <input type="text" id="repairDate" class="form-control" name="repairDate" disabled value="<%Date dNow = new Date(); SimpleDateFormat ft = new SimpleDateFormat(" dd-MM-yyyy HH:mm:ss ");out.print(ft.format(dNow));%>" >
+                                            <input type="text" id="repairDate" class="form-control" name="repairDate" disabled value="<%Date dNow = new Date(); SimpleDateFormat ft = new SimpleDateFormat(" dd-MM-yyyy HH:mm:ss ");out.print(ft.format(dNow));%>">
                                         </div>
                                         <div class="form-group">
                                             <label for="exampleFormControlInput1">ชื่อ-นามสกุล
@@ -51,33 +46,14 @@
                                             <input type="text" name="name" class="form-control" id="name" placeholder="ชื่อ-นามสกุล">
                                         </div>
                                         <div class="form-group">
-                                            <label for="exampleFormControlTextarea1">ที่อยู่<span style="color: red;">*</span>
-											<button type="button" class="btn btn-info btn-xs" data-toggle="modal" data-target="#myModal">GPS</button>
-											<small class="text-primary">** มาร์คพิกัด เพื่อความสะดวกในการหาที่อยู่</small></label>
+                                            <label for="exampleFormControlTextarea1">ที่อยู่<span style="color: red;">*</span></label>
                                             <textarea class="form-control" id="address" rows="3" name="address"></textarea>
-                                            <!-- Modal -->
-                                            <div class="modal fade" id="myModal" style="max-width: 48cm;">
-                                                <div style="margin-left:16%; margin-top: 3%">
-                                                    <!-- Modal content-->
-                                                    <div class="modal-content">
-                                                        <div class="modal-header">
-                                                            <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                                            <h4 class="modal-title">GPS</h4>
-                                                        </div>
-                                                        <div id="map" class="modal-body">
-                                                        </div>
-                                                        <div class="modal-footer">
-                                                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
                                         </div>
                                         <div class="form-group">
                                             <label for="exampleFormControlInput1">เบอร์โทรศัพท์
 											<span style="color: red;">*</span>
 										</label>
-                                            <input type="email" name="phone" class="form-control" id="phone" placeholder="เบอร์โทรศัพท์">
+                                            <input type="number" name="phone" class="form-control" id="phone" placeholder="เบอร์โทรศัพท์">
                                         </div>
                                         <div class="form-group">
                                             <label for="exampleFormControlInput1">อีเมล</label>
@@ -125,13 +101,6 @@
                                                 <label for="exampleFormControlTextarea1">รายละเอียดเพิ่มเติม</label>
                                                 <textarea class="form-control" id="detail" rows="3" name="detail"></textarea>
                                             </div>
-                                            <div class="form-group">
-                                                <label for="exampleFormControlFile1">ไฟล์แนบ</label>
-                                                <input type="file" class="form-control-file" id="fileName">
-                                            </div>
-                                            <div class=" form-group ">
-                                                <small class="text-primary ">** รองรับเฉพาะ ไฟล์ภาพ jpg,jpeg,png หรือ ไฟล์เอกสาร word excel Pdf เท่านั้น</small>
-                                            </div>
                                         </div>
                                     </div>
                                     <div class="box box-warning ">
@@ -157,8 +126,93 @@
                                 <button type="button " class="btn btn-secondary " onclick="window.location.href='/' ">ยกเลิก</button>
                             </div>
                         </div>
+                        <input id="map" type="hidden">
                     </body>
 
                     <jsp:include page="../layout/footer.jsp "></jsp:include>
+
+
+                    <script>
+                        //insert
+                        function insertConfirm() {
+                            var repairBean = {
+                                repairDateStr: $('#repairDate').val(),
+                                repairname: $('#name').val(),
+                                repairAddress: $('#address').val(),
+                                repairPhone: $('#phone').val(),
+                                repairEmail: $('#email').val(),
+                                repairAppliances: $('#appliances').val(),
+                                repairProduct: $('#product').val(),
+                                repairBrand: $('#brand').val(),
+                                repairWaste: $('#Waste').val(),
+                                repairDetail: $('#detail').val(),
+                                repairAppointment: $('#appointment').val(),
+                                latitude: lat,
+                                longitude: long,
+                            }
+                            $.ajax({
+                                type: "POST",
+                                url: "/insertRepair",
+                                contentType: "application/json; charset=utf-8",
+                                data: JSON.stringify(repairBean),
+                                dataType: "json",
+                                success: function(msg) {
+                                    console.log(msg)
+                                    window.location.href = msg.page;
+                                },
+                                error: function() {
+                                    window.location.href = "/";
+
+                                }
+                            });
+
+                        }
+                        var map, infoWindow;
+
+                        function initMap() {
+                            map = new google.maps.Map(document.getElementById('map'), {
+                                center: {
+                                    lat: -34.397,
+                                    lng: 150.644
+                                },
+                                zoom: 6
+                            });
+                            infoWindow = new google.maps.InfoWindow;
+
+                            // Try HTML5 geolocation.
+                            if (navigator.geolocation) {
+                                navigator.geolocation.getCurrentPosition(function(position) {
+                                    var pos = {
+                                        lat: position.coords.latitude,
+                                        lng: position.coords.longitude
+                                    };
+                                    lat = position.coords.latitude;
+                                    long = position.coords.longitude;
+                                    console.log(lat)
+                                    console.log(long)
+                                    infoWindow.setPosition(pos);
+                                    infoWindow.setContent('ตำแหน่งของคุณ');
+                                    infoWindow.open(map);
+                                    map.setCenter(pos);
+                                }, function() {
+                                    handleLocationError(true, infoWindow, map.getCenter());
+                                });
+                            } else {
+                                // Browser doesn't support Geolocation
+                                handleLocationError(false, infoWindow, map.getCenter());
+                            }
+                        }
+
+                        function handleLocationError(browserHasGeolocation, infoWindow, pos) {
+                            infoWindow.setPosition(pos);
+                            infoWindow.setContent(browserHasGeolocation ?
+                                'Error: The Geolocation service failed.' :
+                                'Error: Your browser doesn\'t support geolocation.');
+                            infoWindow.open(map);
+                        }
+                    </script>
+                    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDQOlr7gKrbdrCPrzBuAMnmdCvmM3uZlrw&callback=initMap">
+                    </script>
+
 
                     </html>

@@ -16,7 +16,7 @@
             <div class="box box-default">
                 <div class="form-group">
                     <h3>
-                        <div class="glyphicon glyphicon-list-alt"> ทะเบียนอุปกรณ์ </div>
+                        <div class="glyphicon glyphicon-list-alt">ทะเบียนอุปกรณ์ </div>
                         <div align="center">
                             <a href="/addparts" type="button" class="btn btn btn-warning ">
                                 <span class="glyphicon glyphicon-plus"></span>ทะเบียนอุปกรณ์</a>

@@ -263,7 +263,7 @@ public class RepairDao {
 		Connection conn = con.openConnect();
 		try {
 			sql.append(
-					" INSERT INTO repair (repair_date, repair_name, repair_address, repair_phone, repair_email, repair_appliances, repair_product, repair_brand , repair_waste, repair_detail, repair_appointment) VALUES (?,?,?,?,?,?,?,?,?,?,?) ");
+					" INSERT INTO repair (repair_date, repair_name, repair_address, repair_phone, repair_email, repair_appliances, repair_product, repair_brand , repair_waste, repair_detail, repair_appointment, repair_latitude , repair_longitude) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?) ");
 			prepared = conn.prepareStatement(sql.toString());
 			prepared.setTimestamp(1, new java.sql.Timestamp(DateTHToEN(bean.getRepairDateStr()).getTime()));
 			prepared.setString(2, bean.getRepairname());
@@ -276,6 +276,8 @@ public class RepairDao {
 			prepared.setString(9, bean.getRepairWaste());
 			prepared.setString(10, bean.getRepairDetail());
 			prepared.setDate(11, bean.getRepairAppointment());
+			prepared.setString(12, bean.getLatitude());
+			prepared.setString(13, bean.getLongitude());
 			prepared.executeUpdate();
 
 		} catch (Exception e) {

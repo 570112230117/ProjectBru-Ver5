@@ -233,7 +233,7 @@
                                         "mData": "",
                                         "sWidth": "50px",
                                         "mRender": function(data, type, full) {
-                                            return '<center><a href="/repairmen/' + full.repairId + '" ' + 'class="btn btn-warning btn-sm"><span class="glyphicon glyphicon-edit"></span>' + '</a> <a onclick="gotoUpdate(' + full.repairId + ')" class="btn btn-info btn-sm view_detail" data-toggle="modal" data-target="#myModal"><i class="glyphicon glyphicon-file"></i>  ' + '</a></center>';
+                                            return '<center><a href="/repairmen/' + full.repairId + '" ' + 'class="btn btn-warning btn-xs"><span class="glyphicon glyphicon-edit"></span> แก้ไข' + '</a> <a onclick="gotoUpdate(' + full.repairId + ')" class="btn btn-info btn-xs view_detail" data-toggle="modal" data-target="#myModal" >รายละเอียด  ' + '</a>  <a href="/map/' + full.repairId + '" ' + ' type="button" class="btn btn-success btn-xs">GPS</a>' + ' </center>';
                                         }
                                     },
 

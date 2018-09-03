@@ -10,6 +10,7 @@ import java.util.List;
 import org.springframework.stereotype.Repository;
 
 import com.bru.model.LoginBean;
+import com.bru.model.RepairBean;
 import com.bru.model.RepairStatusBean;
 import com.bru.model.RoleBean;
 import com.bru.util.ConnectDB;
@@ -132,6 +133,31 @@ public class RepairmenDao {
 			conn.close();
 		}
 	}
+	public RepairBean findById(String id) throws SQLException {
+		ConnectDB con = new ConnectDB();
+		PreparedStatement prepared = null;
+		StringBuilder sql = new StringBuilder();
+		RepairBean bean = new RepairBean();
+		Connection conn = con.openConnect();
+		try {
+			sql.append(" SELECT * FROM repair rp WHERE rp.repair_id = ?");
+			prepared = conn.prepareStatement(sql.toString());
+			prepared.setString(1, id);
+			ResultSet rs = prepared.executeQuery();
 
+			while (rs.next()) {
+				bean.setRepairId(rs.getInt("repair_id"));
+				bean.setLatitude(rs.getString("repair_latitude"));
+				bean.setLongitude(rs.getString("repair_longitude"));
+
+			}
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		} finally {
+			conn.close();
+		}
+		return bean;
+	}// findById
 	// end
 }

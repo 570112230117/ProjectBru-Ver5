@@ -29,7 +29,7 @@ pageEncoding="UTF-8"%>
 				<span class="icon-bar"></span> <span class="icon-bar"></span> <span
 					class="icon-bar"></span>
 			</button>
-                            <a class="navbar-brand" href="/">Logo</a>
+                            <a href="#"><img src="/img/setting-spanner.png" width="42" height="42"></a>
                         </div>
                         <div class="collapse navbar-collapse" id="myNavbar">
                             <ul class="nav navbar-nav navbar-right">

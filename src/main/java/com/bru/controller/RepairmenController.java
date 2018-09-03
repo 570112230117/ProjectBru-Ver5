@@ -163,6 +163,15 @@ public class RepairmenController {
 
 		return "personaladmin";
 	}
+	// map
+		@RequestMapping(path = "/map/{values}", method = RequestMethod.GET)
+		public String map(@PathVariable("values") String values, HttpServletRequest request, Model model) throws SQLException {
+			
+			RepairBean bean = new RepairBean();
+			bean = repairmenDao.findById(values);
+			request.setAttribute("repairBean", bean);
+			return "map";
+		}
 
 	@RequestMapping(path = "/table", method = RequestMethod.GET)
 	public String tabel(HttpServletRequest request, Model model) {

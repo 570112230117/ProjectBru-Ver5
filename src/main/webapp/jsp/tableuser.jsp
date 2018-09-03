@@ -35,6 +35,7 @@
                                 <th>ชื่อ - นามสกุล</th>
                                 <th>ประเภทสินค้า</th>
                                 <th>หัวข้อเรื่องการแจ้งซ่อม</th>
+                                <th>นัดวันซ่อม</th>
                                 <th>สถานะ</th>
                                 <th>ตอบกลับ</th>
 
@@ -47,6 +48,7 @@
                                 <th>ชื่อ - นามสกุล</th>
                                 <th>ประเภทสินค้า</th>
                                 <th>หัวข้อเรื่องการแจ้งซ่อม</th>
+                                <th>นัดวันซ่อม</th>
                                 <th>สถานะ</th>
                                 <th>ตอบกลับ</th>
 
@@ -74,9 +76,11 @@
                     }, {
                         "mData": "repairname"
                     }, {
-                        "mData": "repairWaste"
+                        "mData": "repairProduct"
                     }, {
                         "mData": "repairWaste"
+                    }, {
+                        "mData": "repairmenDate"
                     }, {
                         "mData": "",
                         "mRender": function(data, type, full) {
